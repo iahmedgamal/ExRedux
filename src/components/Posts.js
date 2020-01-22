@@ -4,10 +4,17 @@ import { fetchPosts } from '../actions/postActions';
 
 class Posts extends Component {
   componentDidMount() {
-    console.log('here');
     this.props.fetchPosts();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.post) {
+      this.props.posts.unshift(nextProps.post);
+      console.log('recived post' + JSON.stringify(nextProps.post));
+    } else {
+      console.log('Nope');
+    }
+  }
   render() {
     const postItems = this.props.posts.map(post => (
       <div>
@@ -25,7 +32,8 @@ class Posts extends Component {
   }
 }
 const mapStateToProps = state => ({
-  posts: state.posts.items
+  posts: state.posts.items,
+  post: state.posts.post
 });
 
 export default connect(mapStateToProps, { fetchPosts })(Posts);

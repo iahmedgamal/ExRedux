@@ -2,7 +2,7 @@ import { FETCH_POSTS, NEW_POST } from '../actions/types';
 
 const initialState = {
   items: [],
-  item: {}
+  post: {}
 };
 
 export default function(state = initialState, action) {
@@ -11,6 +11,9 @@ export default function(state = initialState, action) {
     case FETCH_POSTS:
       console.log('fetch posts postReducer');
       return { ...state, items: action.payload };
+    case NEW_POST:
+      console.log('add posts postReducer');
+      return { ...state, post: action.payload };
     default:
       console.log('default');
 
